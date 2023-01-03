@@ -1,0 +1,48 @@
+//general styles
+.navbar-default{
+	background: none;
+	border-bottom: 2px dotted #eee
+}
+.navbar-brand{
+	.fa{
+		color: #333; 
+		margin-right: 0.7rem;
+	}
+}
+
+
+//Animated menu styles
+.navbar-default .navbar-toggle{
+	background: none;
+	border: none;
+	&:hover,&:active,&:focus{
+		background: none;
+	}
+	.icon-bar{
+		background: #666 !important;
+		height: 2px;
+		transition: transform 0.4s;
+	}
+	
+	//When Clicked
+	&.toggle-active{
+		background: none;
+		height: 30px;
+		.icon-bar{
+			height: 2px;
+			&:nth-child(2){
+				margin-top: 3px;
+				transform-origin: center;
+				transform: rotate(45deg);
+			}
+			&:nth-child(3){
+				display: none;
+			}
+			&:nth-child(4){
+				transform-origin: center;
+				transform: rotate(-45deg);
+				margin-top: -2px;
+			}
+		}
+	}
+}
