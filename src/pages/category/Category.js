@@ -12,8 +12,7 @@ import { db } from "../../utils/firebase";
 const Category = () => {
   const [blogs, setBlogs] = useState([]);
   const { id } = useParams();
-  const [tags, setTags] = useState([]);
-  const [categories, setCategories] = useState([]);
+  
   // get all posts
   useEffect(() => {
     const sponsoredBlogs = async () => {
@@ -29,8 +28,6 @@ const Category = () => {
 
     sponsoredBlogs();
   }, []);
-
-  console.log(blogs);
 
   return (
     <>

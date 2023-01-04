@@ -12,8 +12,6 @@ import { db } from "../../utils/firebase";
 const Tags = () => {
   const [blogs, setBlogs] = useState([]);
   const { id } = useParams();
-  const [tags, setTags] = useState([]);
-  const [categories, setCategories] = useState([]);
 
   // get all posts
   useEffect(() => {
