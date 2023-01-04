@@ -20,7 +20,6 @@ import Tags from "../../components/sidebar/Tags";
 import Comments from "../../components/comment/Comments";
 
 const DisplayPost = ({user}) => {
-  console.log(user);
   const { id } = useParams();
   const [blog, setBlog] = useState([]);
   const [popularBlogs, setPopularBlogs] = useState([]);

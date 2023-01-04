@@ -61,13 +61,11 @@ function App() {
           user.admin = idTokenResult.claims.admin;
         });
         setUser(user);
-        console.log(user);
       } else {
         setUser("");
       }
     });
   }, []);
-  // console.log("user");
   // const role = "admin";
   const router = createBrowserRouter(
     createRoutesFromElements(
