@@ -18,7 +18,7 @@ const defaultFormFields = {
   email: "",
   reply: "",
 };
-const DisplayComments = ({ comment, postId, slugUrl }) => {
+const DisplayComments = ({ comment, postId, slugUrl, user }) => {
   // console.log(comment);
   const [replyToggle, setReplyToggle] = useState(false);
   const [formFields, setFormFields] = useState(defaultFormFields);
@@ -56,7 +56,17 @@ const DisplayComments = ({ comment, postId, slugUrl }) => {
   // Create a function for working with fields
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormFields({ ...formFields, [name]: value });
+
+    if (user) {
+      setFormFields({
+        ...formFields,
+        name: user.displayName,
+        email: user.email,
+        [name]: value,
+      });
+    } else {
+      setFormFields({ ...formFields, [name]: value });
+    }
   };
 
   // get replies
@@ -76,7 +86,7 @@ const DisplayComments = ({ comment, postId, slugUrl }) => {
 
     getReplies();
   }, [postId, slugUrl]);
-  // console.log(replies);
+
   return (
     <>
       <li className="comment even thread-even depth-1" id="comment-1">
@@ -127,24 +137,31 @@ const DisplayComments = ({ comment, postId, slugUrl }) => {
                   value={comment.commentId}
                   name="commentId"
                 />
-                <div className="form-inputs">
-                  <input
-                    required
-                    onChange={handleChange}
-                    name="name"
-                    value={name}
-                    placeholder="Name"
-                    type="text"
-                  />
-                  <input
-                    required
-                    onChange={handleChange}
-                    name="email"
-                    value={email}
-                    placeholder="Email"
-                    type="email"
-                  />
-                </div>
+                {user.id ? (
+                  <>
+                    <div className="form-inputs">
+                      <input
+                        required
+                        onChange={handleChange}
+                        name="name"
+                        value={name}
+                        placeholder="Name"
+                        type="text"
+                      />
+                      <input
+                        required
+                        onChange={handleChange}
+                        name="email"
+                        value={email}
+                        placeholder="Email"
+                        type="email"
+                      />
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )}
+
                 <div className="form-textarea">
                   <textarea
                     required
@@ -187,7 +204,8 @@ const DisplayComments = ({ comment, postId, slugUrl }) => {
                                 {reply.name}
                                 <span className="comments-date">
                                   <span style={{ color: "red" }}>
-                                    replied {reply.timestamp.toDate().toDateString()}
+                                    replied{" "}
+                                    {reply.timestamp.toDate().toDateString()}
                                   </span>
                                 </span>
                               </h4>

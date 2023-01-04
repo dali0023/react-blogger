@@ -96,7 +96,7 @@ const Tags = () => {
                               0,
                               300
                             )}`}</p>
-                            <Link className="read-more" to={`${blog.slugUrl}`}>
+                            <Link className="read-more" to={`/posts/${blog.slugUrl}`}>
                               {" "}
                               READ MORE...
                             </Link>

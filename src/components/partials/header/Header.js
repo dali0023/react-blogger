@@ -53,15 +53,6 @@ const Header = ({ user, handleSignout }) => {
                   <li className="nav-item">
                     <Link
                       className="nav-link"
-                      to="/posts/add-post"
-                      style={{ fontSize: "18px" }}
-                    >
-                      Add Post
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
                       to="/make-admin"
                       style={{ fontSize: "18px" }}
                     >
@@ -82,7 +73,7 @@ const Header = ({ user, handleSignout }) => {
                null
               )}
             </ul>
-            {showText && (
+            {/* {showText && (
               <form className="d-flex">
                 <input
                   className="form-control me-2"
@@ -99,7 +90,7 @@ const Header = ({ user, handleSignout }) => {
               style={{ marginRight:"20px" }}
             >
               Search
-            </button> 
+            </button>  */}
             {UserId ? (
               <>
                 <div className="dropdown text-center">

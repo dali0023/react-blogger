@@ -14,7 +14,7 @@ const SponsoredNews = ({sponsoredBlog}) => {
           </div>
           <div className="wpo-blog-content">
             <h2>
-              <Link to="#">
+              <Link to={`/posts/${sponsoredBlog.slugUrl}`}>
               {`${sponsoredBlog?.title.substring(0, 50)}`}
                 {sponsoredBlog?.title.length < 100 ? "..." : ""}
               </Link>

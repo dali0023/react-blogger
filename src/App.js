@@ -61,12 +61,13 @@ function App() {
           user.admin = idTokenResult.claims.admin;
         });
         setUser(user);
+        console.log(user);
       } else {
         setUser("");
       }
     });
   }, []);
-
+  // console.log("user");
   // const role = "admin";
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -78,7 +79,7 @@ function App() {
           <Route index element={<Home user={user} />} />
           <Route path="/posts">
             <Route index element={<Posts />} />
-            <Route path=":id" element={<DisplayPost />} />
+            <Route path=":id" element={<DisplayPost user={user}/>} />
             <Route
               path="add-post"
               element={

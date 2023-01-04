@@ -20,7 +20,7 @@ const defaultFormFields = {
   comment: "",
 };
 
-const Comments = ({ postId, slugUrl, setCommentCounter }) => {
+const Comments = ({ postId, slugUrl, setCommentCounter, user }) => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { name, email, comment } = formFields;
   const navigate = useNavigate();
@@ -41,6 +41,7 @@ const Comments = ({ postId, slugUrl, setCommentCounter }) => {
           postId: postId.toString(),
           timestamp: serverTimestamp(),
         });
+
         resetFormFields();
         toast.success("Comment added successfully");
       } catch (err) {
@@ -54,7 +55,17 @@ const Comments = ({ postId, slugUrl, setCommentCounter }) => {
   // Create a function for working with fields
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormFields({ ...formFields, [name]: value });
+
+    if (user) {
+      setFormFields({
+        ...formFields,
+        name: user.displayName,
+        email: user.email,
+        [name]: value,
+      });
+    } else {
+      setFormFields({ ...formFields, [name]: value });
+    }
   };
 
   // get comments
@@ -65,11 +76,11 @@ const Comments = ({ postId, slugUrl, setCommentCounter }) => {
         const q = query(commentsRef, where("postId", "==", postId));
         const docSnapshot = await getDocs(q);
         const databaseInfo = [];
-        docSnapshot.forEach((doc, i) => {          
+        docSnapshot.forEach((doc, i) => {
           databaseInfo.push({ commentId: doc.id, ...doc.data() });
         });
         setComments(databaseInfo);
-        setCommentCounter(databaseInfo.length)
+        setCommentCounter(databaseInfo.length);
       }
     };
 
@@ -87,6 +98,7 @@ const Comments = ({ postId, slugUrl, setCommentCounter }) => {
               key={i}
               postId={postId}
               slugUrl={slugUrl}
+              user={user}
             />
           ))}
         </ol>
@@ -95,24 +107,31 @@ const Comments = ({ postId, slugUrl, setCommentCounter }) => {
       <div className="comment-respond">
         <h3 className="comment-reply-title">Leave a reply</h3>
         <form onSubmit={handleSubmit} className="comment-form">
-          <div className="form-inputs">
-            <input
-              required
-              onChange={handleChange}
-              name="name"
-              value={name}
-              placeholder="Name"
-              type="text"
-            />
-            <input
-              required
-              onChange={handleChange}
-              name="email"
-              value={email}
-              placeholder="Email"
-              type="email"
-            />
-          </div>
+          {user.id ? (
+            <>
+              <div className="form-inputs">
+                <input
+                  required
+                  onChange={handleChange}
+                  name="name"
+                  value={name}
+                  placeholder="Name"
+                  type="text"
+                />
+                <input
+                  required
+                  onChange={handleChange}
+                  name="email"
+                  value={email}
+                  placeholder="Email"
+                  type="email"
+                />
+              </div>
+            </>
+          ) : (
+            ""
+          )}
+
           <div className="form-textarea">
             <textarea
               required
