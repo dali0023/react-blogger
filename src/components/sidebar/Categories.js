@@ -7,7 +7,6 @@ const Categories = ({ category }) => {
     <li>
       <Link to={`/categories/${slugify(category)}`}>
         {category}
-        <span>(05)</span>
       </Link>
     </li>
   );
