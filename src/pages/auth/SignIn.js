@@ -115,7 +115,7 @@ const SignIn = () => {
                     <div className="col-lg-12 col-md-12 col-12">
                       <div className="check-box-wrap">
                         <div className="forget-btn">
-                          <a href="forgot.html">Forgot Password?</a>
+                          {/* <a href="forgot.html">Forgot Password?</a> */}
                         </div>
                       </div>
                     </div>
