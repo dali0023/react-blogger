@@ -33,7 +33,7 @@ const Highlights = ({ blog }) => {
                 />
               </li>
               <li>
-                By <a href="#">{blog?.author}</a>
+                By <Link to="/">{blog?.author}</Link>
               </li>
               <li>{blog.timestamp.toDate().toDateString()}</li>
             </ul>
